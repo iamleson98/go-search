@@ -183,7 +183,9 @@ func (i *ElasticSearchIndexer) Search(q index.Query) (index.Iterator, error) {
 					},
 				},
 				"script_score": map[string]interface{}{
-					"source": "_score + doc['PageRank'].value",
+					"script": map[string]interface{}{
+						"source": "_score + doc['PageRank'].value",
+					},
 				},
 			},
 		},

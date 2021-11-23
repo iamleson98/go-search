@@ -186,7 +186,7 @@ done:
 	for {
 		select {
 		case <-ctx.Done():
-			break
+			break done
 		case payload, ok := <-params.Input():
 			if !ok {
 				break done

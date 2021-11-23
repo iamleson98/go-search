@@ -15,9 +15,9 @@ type Iterator interface {
 
 // Link
 type Link struct {
-	ID         uuid.UUID
-	URL        string
-	RetrivedAt time.Time
+	ID          uuid.UUID
+	URL         string
+	RetrievedAt time.Time
 }
 
 type Edge struct {

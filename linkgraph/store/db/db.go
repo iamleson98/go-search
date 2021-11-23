@@ -41,12 +41,12 @@ func (d *DbGraph) Close() error {
 
 // UpsertLink
 func (d *DbGraph) UpsertLink(link *graph.Link) error {
-	row := d.db.QueryRow(upsertLinkQuery, link.URL, link.RetrivedAt.UTC())
-	if err := row.Scan(&link.ID, &link.RetrivedAt); err != nil {
+	row := d.db.QueryRow(upsertLinkQuery, link.URL, link.RetrievedAt.UTC())
+	if err := row.Scan(&link.ID, &link.RetrievedAt); err != nil {
 		return fmt.Errorf("upsert link: %w", err)
 	}
 
-	link.RetrivedAt = link.RetrivedAt.UTC()
+	link.RetrievedAt = link.RetrievedAt.UTC()
 	return nil
 }
 
@@ -59,7 +59,7 @@ func (d *DbGraph) FindLink(id uuid.UUID) (*graph.Link, error) {
 		}
 	)
 
-	if err := row.Scan(&link.URL, &link.RetrivedAt); err != nil {
+	if err := row.Scan(&link.URL, &link.RetrievedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("find link: %w", graph.ErrNotFound)
 		}
@@ -67,7 +67,7 @@ func (d *DbGraph) FindLink(id uuid.UUID) (*graph.Link, error) {
 		return nil, fmt.Errorf("find link: %w", err)
 	}
 
-	link.RetrivedAt = link.RetrivedAt.UTC()
+	link.RetrievedAt = link.RetrievedAt.UTC()
 	return link, nil
 }
 

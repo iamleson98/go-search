@@ -21,11 +21,11 @@ func (i *linkIterator) Next() bool {
 	}
 
 	l := new(graph.Link)
-	i.lastErr = i.rows.Scan(&l.ID, &l.URL, &l.RetrivedAt)
+	i.lastErr = i.rows.Scan(&l.ID, &l.URL, &l.RetrievedAt)
 	if i.lastErr != nil {
 		return false
 	}
-	l.RetrivedAt = l.RetrivedAt.UTC()
+	l.RetrievedAt = l.RetrievedAt.UTC()
 
 	i.latchedLink = l
 
